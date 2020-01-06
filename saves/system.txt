@@ -1,0 +1,55 @@
+automat-Целевой автомат-500
+state-simple-default-Запуск целевого автомата
+state-simple-S0-Цель:Эффективность
+state-simple-S1-Цель:Продление работоспособности
+state-simple-S2-Цель:Предотвращение перегрева
+transition-start-default-S0--S A0--
+transition-S0toS1-S0-S1-TX0-S A1--
+transition-S0toS2-S0-S2-TX1-S A2--
+transition-S1toS0-S1-S0-TX2-S A0--
+transition-S2toS0-S2-S0-TX3-S A0--
+/automat
+layer-Целевой уровень
+add-automat-Целевой автомат
+/layer
+__________________________________________________
+automat-SA0-500-sleeping-S
+state-simple-default-Запуск SA0
+state-simple-S0-Сценарий:Понижение затрат
+state-simple-S1-Сценарий:Повышение эффективности
+transition-start-default-S0----
+transition-S0toS1-S0-S1-SX0---
+transition-S0toS1-S1-S0-SX1---
+/automat
+__________________________________________________
+automat-SA1-500-sleeping-S
+state-simple-default-Запуск SA1
+state-simple-S0-Сценарий:Оптимизация выключением нагрузки
+state-simple-S1-Сценарий:Оптимизация по времени (отложить)
+state-simple-S2-Сценарий:Оптимизация с учетом прогноза
+transition-start-default-S0----
+transition-S0toS1-S0-S1-SX3---
+transition-S0toS2-S0-S2-SX4---
+transition-S1toS0-S1-S0-SX5---
+transition-S2toS0-S2-S0-SX6---
+/automat
+__________________________________________________
+automat-SA2-500-sleeping-S
+state-simple-default-Запуск SA2
+state-simple-S0-Сценарий:Управление мощностью охлаждения
+state-simple-S1-Сценарий:Управление условиями охлаждения
+transition-start-default-S0----
+transition-S0toS1-S0-S1-SX7---
+transition-S1toS0-S1-S0-SX8---
+/automat
+__________________________________________________
+layer-Сценарный уровень
+add-automat-SA0
+add-automat-SA1
+add-automat-SA2
+/layer
+__________________________________________________
+cognitive-Управление трансформатором
+add-layer-Целевой уровень
+add-layer-Сценарный уровень
+/cognitive
