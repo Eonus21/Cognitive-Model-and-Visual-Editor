@@ -15,10 +15,12 @@ public class MainFrame extends JFrame {
         JPanel leftPanel = new LeftPanelCreator(manager).getPanel();
         mainPanelCreator = new MainPanelCreator();
         JPanel mainPanel = mainPanelCreator.getPanel();
+        JPanel rightPanel = new RightPanelCreator(manager).getPanel();
         contents.add(leftPanel);
         contents.add(mainPanel);
+        contents.add(rightPanel);
         setContentPane(contents);
-        setSize(1000, 700);
+        setSize(1300, 700);
         setVisible(true);
     }
     public MyCanvas getCanvas () {

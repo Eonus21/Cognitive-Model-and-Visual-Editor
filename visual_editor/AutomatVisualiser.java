@@ -1,19 +1,29 @@
 package visual_editor;
 
 import java.awt.geom.Rectangle2D;
+
+import fsm.Automat;
+
 import java.awt.*;
 
 public class AutomatVisualiser extends ObjectVisualiser {
     private int x,y,width,height;
-    public AutomatVisualiser() {
-        setPosition(0, 0);
-        setSize(1, 1);
+    private Automat automat;
+    public AutomatVisualiser(Automat a, GeometryInfo gi) {
+        this.automat = a;
+        setPosition(gi.getX(), gi.getY());
+        setSize(gi.getX1(), gi.getY1());
     }
 
     @Override
-    void change(int i, Graphics2D g2) {
-        g2.setPaint(Color.GREEN);
-        if (i == 0) shape = new Rectangle2D.Double(x,y,width,height);
+    void change(Graphics2D g2) {
+        if (automat.isActive()) 
+            g2.setPaint(Color.GREEN);
+        else 
+            g2.setPaint(Color.DARK_GRAY);
+            
+        shape = new Rectangle2D.Double(x*scale,y*scale,width*scale,height*scale);
+        g2.fill(shape);
     }
 
     public void setPosition (int x,int y) {

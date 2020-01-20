@@ -1,6 +1,6 @@
 package fsm;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 
 //Доделать Eventы, они пока не передается в Automat
 //Сделать через ArrayList в Automat

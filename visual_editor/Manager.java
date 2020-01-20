@@ -10,8 +10,11 @@ import cognitive_system.file_integration.*;
 
 public class Manager {
     private HashMap <String,CognitiveSystem> systems;
+    private HashMap <String, Automat> automats;
     private ArrayList <MyComboBox> updatableBoxes;
-    private String noSelected;
+    private RightPanelCreator rpc;
+    private ArrayList <VisualiseInfo> visualiseInfos;
+    public String noSelected;
     private String[] systemNames;
     private String[] automatNames;
     private String[] layerNames;
@@ -29,18 +32,22 @@ public class Manager {
         updatableBoxes = new ArrayList<MyComboBox>();
         update();
     }
-    private void updateArray(int i) {
+    public void updateArray(int i) {
         for (int j = i;j<activeElements.size();j++)
             activeElements.set(j, noSelected);
     }
     public void addFile (String way, String parcer) {
         try {
-            systems = new FileReader(way, parcer).getCognitiveSystems();
+            FileReader fr = new FileReader(way, parcer);
+            systems = fr.getCognitiveSystems();
+            automats = fr.getAutomats();
+            visualiseInfos = fr.getVisualiseInfos();
             systemNames = new String[systems.size()+1];
             systemNames[0] = noSelected;
             int i = 1;
             for (Entry <String, CognitiveSystem> entry:systems.entrySet()) {
                 entry.getValue().setDataController(dc);
+                //entry.getValue().start();//TODO убрать потом, заменить на кнопку запуска
                 systemNames[i] = entry.getKey();
                 i++;
             }
@@ -50,7 +57,14 @@ public class Manager {
         }
     }
     public String[] getSystemNames () {
-        return systemNames;
+        String [] arr = new String [systems.size()+1];
+        arr[0] = noSelected;
+        int i = 1;
+        for (Entry <String, CognitiveSystem> entry : systems.entrySet()) {
+            arr[i] = entry.getKey();
+            i++;
+        }
+        return arr;
     }
     public String[] getLayerNames () {
         if (activeElements.get(0).equals(noSelected)) 
@@ -137,6 +151,7 @@ public class Manager {
             return null;
     }
     private void update() {
+        systemNames = getSystemNames();
         layerNames = getLayerNames();
         automatNames = getAutomatNames();
         stateNames = getStateNames();
@@ -152,6 +167,7 @@ public class Manager {
     public void update (int i, String s) {
         System.out.println("update " + i + " selected " + s);
         activeElements.set(i,s);
+        rpc.update(activeElements, i);
         updateArray(i+1);
         update(i+1);
     }
@@ -173,5 +189,82 @@ public class Manager {
             default:
                 return new String[]{};
         }
+    }
+    public HashMap <String, Automat> getAutomatsHashMap () {
+        return this.automats;
+    }
+    public HashMap <String,CognitiveSystem> getSystemsHashMap () {
+        return this.systems;
+    }
+    public ArrayList <VisualiseInfo> getVisualiseInfos () {
+        return this.visualiseInfos;
+    }
+    public void setRightPanelCreator (RightPanelCreator rpc) {
+        this.rpc = rpc;
+    }
+    public String getNoSelectedString () {
+        return this.noSelected;
+    }
+    public CognitiveSystem getActiveSystem () {
+        if (activeElements.get(0).equals(noSelected))
+            return null;
+        else 
+            return systems.get(activeElements.get(0));
+    }
+    public AutomatLayer getActiveLayer () {
+        if (activeElements.get(1).equals(noSelected))
+            return null;
+        else {
+            ArrayList <AutomatLayer> layers = getActiveSystem().getLayers();
+            for (AutomatLayer layer:layers)
+                if (layer.id.equals(activeElements.get(1)))
+                    return layer;
+            
+            
+            return null;
+        }
+    }
+    public Automat getActiveAutomat () {
+        if (activeElements.get(2).equals(noSelected)) {
+            return null;
+        }
+        else {
+            ArrayList <Automat> automats = getActiveLayer().getAutomats();
+            for (Automat a:automats) 
+                if (a.name.equals(activeElements.get(2)))  
+                    return a;
+            
+            return null;
+        }
+    }
+    public State getActiveState () {
+        if (activeElements.get(3).equals(noSelected)) {
+            return null;
+        }
+        else {
+            try {
+                return getActiveAutomat().getStates().get(activeElements.get(3));
+            } catch (Exception e) {
+                return null;
+            }
+        }
+    }
+    public Transition getActiveTransition () {
+        if (activeElements.get(4).equals(noSelected)) {
+            return null;
+        }
+        else {
+            ArrayList <Transition> transitions = 
+                getActiveAutomat().getTransitionsFromState(activeElements.get(3));
+            
+            for (Transition t:transitions)
+                if (t.getId().equals(activeElements.get(4)))
+                    return t;
+            
+            return null;
+        }
+    }
+    public ArrayList <String> getActiveElements () {
+        return this.activeElements;
     }
 }

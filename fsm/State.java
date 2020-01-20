@@ -9,4 +9,7 @@ public abstract class State {
         return this.id;
     }
     public abstract void run();
+    public void setId (String s) {
+        this.id = s;
+    }
 } 

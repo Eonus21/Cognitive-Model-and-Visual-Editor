@@ -12,4 +12,7 @@ public class AllManagingTransition extends Transition {
         automat.getDataWriter().writeEvent(generateEvent);
         return true;
     }
+    public String getEventName () {
+        return "all";
+    }
 }

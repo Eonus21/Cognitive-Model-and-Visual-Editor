@@ -6,4 +6,7 @@ public class AllTransition extends Transition {
     public boolean check () {
         return true;
     }
+    public String getEventName () {
+        return "all";
+    }
 }

@@ -88,4 +88,10 @@ public class Automat implements Runnable {
     public ArrayList <Transition> getTransitionsFromState (String state) {
         return transitions.get(state);
     }
+    public boolean isActive () {
+        return this.active;
+    }
+    public HashMap <String, ArrayList<Transition>> getAlltransitions () {
+        return this.transitions;
+    }
 }

@@ -1,4 +1,4 @@
-automat-Целевой автомат-500
+automat-Целевой автомат-1500
 state-simple-default-Запуск целевого автомата
 state-simple-S0-Цель:Эффективность
 state-simple-S1-Цель:Продление работоспособности
@@ -13,7 +13,7 @@ layer-Целевой уровень
 add-automat-Целевой автомат
 /layer
 __________________________________________________
-automat-SA0-500-sleeping-S
+automat-SA0-1500-sleeping-S
 state-simple-default-Запуск SA0
 state-simple-S0-Сценарий:Понижение затрат
 state-simple-S1-Сценарий:Повышение эффективности
@@ -22,7 +22,7 @@ transition-S0toS1-S0-S1-SX0---
 transition-S0toS1-S1-S0-SX1---
 /automat
 __________________________________________________
-automat-SA1-500-sleeping-S
+automat-SA1-1500-sleeping-S
 state-simple-default-Запуск SA1
 state-simple-S0-Сценарий:Оптимизация выключением нагрузки
 state-simple-S1-Сценарий:Оптимизация по времени (отложить)
@@ -34,7 +34,7 @@ transition-S1toS0-S1-S0-SX5---
 transition-S2toS0-S2-S0-SX6---
 /automat
 __________________________________________________
-automat-SA2-500-sleeping-S
+automat-SA2-1500-sleeping-S
 state-simple-default-Запуск SA2
 state-simple-S0-Сценарий:Управление мощностью охлаждения
 state-simple-S1-Сценарий:Управление условиями охлаждения
@@ -53,3 +53,13 @@ cognitive-Управление трансформатором
 add-layer-Целевой уровень
 add-layer-Сценарный уровень
 /cognitive
+__________________________________________________
+visual-Целевой уровень-layer-Управление трансформатором-0-0-500-200
+visual-Целевой автомат-automat-Целевой уровень-10-10-480-180
+visual-S0-state-Целевой автомат-10-10-100-100
+visual-S1-state-Целевой автомат-200-90-100-100
+visual-S2-state-Целевой автомат-390-10-100-100
+visual-S0toS1-transition-Целевой автомат/S0
+visual-S1toS2-transition-Целевой автомат/S1
+visual-S2toS0-transition-Целевой автомат/S2
+visual-Сценарный уровень-layer-Управление трансформатором-0-201-500-200

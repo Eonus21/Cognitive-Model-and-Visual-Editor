@@ -16,11 +16,18 @@ public abstract class Transition {
     public String getId () {
         return this.id;
     }
+    public void setId (String s) {
+        this.id = s;
+    }
     public abstract boolean check();
+    public abstract String getEventName();
     public String getNextStateId () {
         return this.nextStateId;
     }
     public String getPrevStateId () {
         return this.prevStateId;
+    }
+    public void setPrevStateId (String s) {
+        this.prevStateId = s;
     }
 }

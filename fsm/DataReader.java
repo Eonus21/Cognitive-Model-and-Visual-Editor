@@ -3,16 +3,13 @@ package fsm;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class DataReader extends Thread {
     BufferedReader reader;
     BufferedWriter writer;
-    private ArrayList <String> waitingEvents;
     public DataReader (BufferedWriter bw) {
         reader = new BufferedReader(new InputStreamReader(System.in));
         writer = bw;
-        waitingEvents = new ArrayList<String>();
         start();
     }
     public void run () {

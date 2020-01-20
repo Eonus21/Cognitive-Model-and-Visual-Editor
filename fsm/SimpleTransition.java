@@ -24,4 +24,7 @@ public class SimpleTransition extends Transition {
     protected void makeTransition () {
 
     }
+    public String getEventName () {
+        return this.eventName;
+    }
 }

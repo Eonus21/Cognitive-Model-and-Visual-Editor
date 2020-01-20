@@ -10,7 +10,7 @@ public class MainPanelCreator {
         this.panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         canvas = new MyCanvas();
-        canvas.setSize(700,300);
+        canvas.setSize(700,700);
         panel.add(canvas);
     }
     public JPanel getPanel () {
